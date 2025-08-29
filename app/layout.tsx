@@ -5,6 +5,7 @@ import { cn } from "@/shared/lib/utils";
 import { ThemeProvider } from "@/shared/components/theme-provider";
 import { Toaster } from "@/shared/components/ui/sonner";
 import { ColorThemeProvider } from "@/shared/components/color-theme-provider";
+import { CookieProvider } from "@/shared/components/cookie-provider";
 import { client } from "@/shared/sanity/lib/client";
 import { GLOBAL_SEO_QUERY } from "@/shared/sanity/queries/seo";
 import { urlFor } from "@/shared/sanity/lib/image";
@@ -86,7 +87,9 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
-          <ColorThemeProvider>{children}</ColorThemeProvider>
+          <ColorThemeProvider>
+            <CookieProvider>{children}</CookieProvider>
+          </ColorThemeProvider>
         </ThemeProvider>
         <Toaster position="top-center" richColors />
       </body>

@@ -7,6 +7,9 @@ import {
   Quote,
   Palette,
   Search,
+  Shield,
+  Cookie,
+  Settings,
 } from "lucide-react";
 
 export const structure = (S: any, context: any) =>
@@ -71,6 +74,37 @@ export const structure = (S: any, context: any) =>
             .schemaType("seo")
             .documentId("seoSingleton")
             .title("SEO globale")
+        ),
+      S.divider(),
+      S.listItem()
+        .title("Privacy Policy")
+        .icon(Shield)
+        .child(
+          S.editor()
+            .id("privacyPolicySingleton")
+            .schemaType("privacyPolicy")
+            .documentId("privacyPolicySingleton")
+            .title("Privacy Policy")
+        ),
+      S.listItem()
+        .title("Cookie Policy")
+        .icon(Cookie)
+        .child(
+          S.editor()
+            .id("cookiePolicySingleton")
+            .schemaType("cookiePolicy")
+            .documentId("cookiePolicySingleton")
+            .title("Cookie Policy")
+        ),
+      S.listItem()
+        .title("Impostazioni Cookie")
+        .icon(Settings)
+        .child(
+          S.editor()
+            .id("cookieSettingsSingleton")
+            .schemaType("cookieSettings")
+            .documentId("cookieSettingsSingleton")
+            .title("Impostazioni Cookie")
         ),
     ]);
 

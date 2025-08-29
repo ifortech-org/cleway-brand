@@ -8,6 +8,9 @@ import faq from "./schemas/documents/faq";
 import testimonial from "./schemas/documents/testimonial";
 import siteColors from "./schemas/documents/siteColors";
 import siteLogo from "./schemas/documents/siteLogo";
+import privacyPolicy from "./schemas/documents/privacy-policy";
+import cookiePolicy from "./schemas/documents/cookie-policy";
+import cookieSettings from "./schemas/documents/cookie-settings";
 import seo from "./schemas/seo";
 
 // Schema UI shared objects
@@ -54,6 +57,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     testimonial,
     siteColors,
     siteLogo,
+    privacyPolicy,
+    cookiePolicy,
+    cookieSettings,
     seo,
     // shared objects
     blockContent,

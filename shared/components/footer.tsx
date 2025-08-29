@@ -49,6 +49,25 @@ export default function Footer() {
           <p className="text-foreground/60">
             &copy; {getCurrentYear()}&nbsp;iFortech. All rights reserved.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-foreground/60">
+            <Link
+              href="/privacy-policy"
+              className="transition-colors hover:text-foreground/80">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link
+              href="/cookie-policy"
+              className="transition-colors hover:text-foreground/80">
+              Cookie Policy
+            </Link>
+            <span>•</span>
+            <Link
+              href="/cookie-preferences"
+              className="transition-colors hover:text-foreground/80">
+              Preferenze Cookie
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
