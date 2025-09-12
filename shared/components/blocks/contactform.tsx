@@ -3,7 +3,7 @@
 "use client";
 
 import { urlFor } from "@/shared/sanity/lib/image";
-import { Image } from "sanity"; // Import the Image type from Sanity
+
 import PortableTextRenderer from "@/shared/components/portable-text-renderer";
 import { Button } from "../ui/button";
 
@@ -72,8 +72,7 @@ function ContactForm({
         description: formData.description,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
+       .then((data) => {
         toast(
           "Richiesta di contatto registrata con successo, a breve verrà contattato da uno dei nostri operatori"
         );
