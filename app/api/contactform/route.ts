@@ -32,11 +32,19 @@ export async function POST(request: Request) {
       },
     });
 
+    if ( !email || !name || !surname || !business_name || !subject || !description ) {
+      return new Response("Missing required fields", { status: 400 });
+    }
+
+    if (!mailSenderAccount.user || !mailSenderAccount.pass || !mailSenderAccount.email) {
+      return new Response("Email configuration missing", { status: 500 });
+    }
+    
     // Email to admin
     const mailData = {
       from: mailSenderAccount.email,
       to: mailSenderAccount.email,
-      subject: `Richiesta di contatto da ${name} ${surname} - ${business_name}`,
+      subject: `CLEWAY - Richiesta di contatto da ${name} ${surname} - ${business_name}`,
       html: `
         <div>
           <h1>Nuova richiesta di contatto</h1>
@@ -57,10 +65,10 @@ export async function POST(request: Request) {
     const mailDataUser = {
       from: mailSenderAccount.email,
       to: email,
-      subject: `Riepilogo richiesta di contatto - Cleway`,
+      subject: `Riepilogo richiesta di contatto - CLEWAY`,
       html: `
         <div>
-          <h1>Cleway</h1>
+          <h1>CLEWAY</h1>
           <div>
             <p>
               Gentile ${name} ${surname}, <br>

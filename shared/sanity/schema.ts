@@ -11,6 +11,7 @@ import siteLogo from "./schemas/documents/siteLogo";
 import privacyPolicy from "./schemas/documents/privacy-policy";
 import cookiePolicy from "./schemas/documents/cookie-policy";
 import cookieSettings from "./schemas/documents/cookie-settings";
+import footerSettings from "./schemas/documents/footerSettings";
 import seo from "./schemas/seo";
 
 // Schema UI shared objects
@@ -60,6 +61,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     privacyPolicy,
     cookiePolicy,
     cookieSettings,
+    footerSettings,
     seo,
     // shared objects
     blockContent,

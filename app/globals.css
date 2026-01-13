@@ -223,3 +223,18 @@
     background-color: var(--accent-foreground);
   }
 }
+
+/* Fix reCAPTCHA in modals */
+body[style*="pointer-events: none"] [style*="z-index: 2000000000"],
+body[style*="pointer-events: none"] iframe[src*="recaptcha"],
+body[style*="pointer-events: none"] .g-recaptcha,
+body[style*="pointer-events: none"] .rc-anchor,
+body[style*="pointer-events: none"] .rc-imageselect,
+body[style*="pointer-events: none"] .rc-challenge {
+  pointer-events: auto !important;
+}
+
+/* Ensure reCAPTCHA overlay is clickable */
+div[style*="z-index: 2000000000"] {
+  pointer-events: auto !important;
+}

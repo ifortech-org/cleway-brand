@@ -75,6 +75,16 @@ export const structure = (S: any, context: any) =>
             .documentId("seoSingleton")
             .title("SEO globale")
         ),
+      S.listItem()
+        .title("Impostazioni Footer")
+        .icon(Settings)
+        .child(
+          S.editor()
+            .id("footerSettingsSingleton")
+            .schemaType("footerSettings")
+            .documentId("footerSettingsSingleton")
+            .title("Impostazioni Footer")
+        ),
       S.divider(),
       S.listItem()
         .title("Privacy Policy")

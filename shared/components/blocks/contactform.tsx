@@ -117,7 +117,38 @@ function ContactForm({
             <Button>{button_text}</Button>
           </DialogTrigger>
 
-          <DialogContent className="sm:max-w-md">
+          <DialogContent 
+            className="sm:max-w-md"
+            onOpenAutoFocus={(e) => e.preventDefault()}
+            onCloseAutoFocus={(e) => e.preventDefault()}
+            onPointerDownOutside={(e) => {
+              // Permetti click su elementi reCAPTCHA esterni
+              const target = e.target as Element;
+              if (target.closest('.g-recaptcha') || 
+                  target.closest('iframe[src*="recaptcha"]') ||
+                  target.closest('iframe[src*="google.com"]') ||
+                  target.closest('.rc-anchor') ||
+                  target.closest('.rc-imageselect') ||
+                  target.closest('.rc-challenge') ||
+                  target.closest('[data-recaptcha]') ||
+                  target.closest('[style*="z-index: 2000000000"]')) {
+                e.preventDefault();
+                return;
+              }
+            }}
+            onEscapeKeyDown={(e) => e.preventDefault()}
+            onInteractOutside={(e) => {
+              // Permetti interazioni con reCAPTCHA
+              const target = e.target as Element;
+              if (target.closest('.g-recaptcha') || 
+                  target.closest('iframe[src*="recaptcha"]') ||
+                  target.closest('iframe[src*="google.com"]') ||
+                  target.closest('[style*="z-index: 2000000000"]')) {
+                e.preventDefault();
+                return;
+              }
+            }}
+          >
             <DialogHeader>
               <DialogTitle>Contattaci</DialogTitle>
               <DialogDescription></DialogDescription>

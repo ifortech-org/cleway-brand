@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LogoDynamic from "@/shared/components/logo-dynamic";
+import { fetchFooterSettings } from "../sanity/lib/footerSettings";
 
 const navItems = [
   {
@@ -19,10 +20,12 @@ const navItems = [
   },
 ];
 
-export default function Footer() {
+export default async function Footer() {
   const getCurrentYear = () => {
     return new Date().getFullYear();
   };
+
+  const footerSettings = await fetchFooterSettings();
 
   return (
     <footer>
@@ -45,6 +48,13 @@ export default function Footer() {
             </Link>
           ))}
         </div>
+        {footerSettings?.customText && (
+          <div className="mt-6 text-center">
+            <p className="text-foreground/70 text-sm leading-relaxed whitespace-pre-line mx-auto">
+              {footerSettings.customText}
+            </p>
+          </div>
+        )}
         <div className="mt-8 flex flex-col lg:flex-row gap-6 justify-center text-center lg:mt-5 text-xs border-t pt-8">
           <p className="text-foreground/60">
             &copy; {getCurrentYear()}&nbsp;iFortech. All rights reserved.
