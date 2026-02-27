@@ -13,16 +13,34 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "titleEn",
+      title: "Titolo (EN)",
+      type: "string",
+      description: "Titolo della privacy policy in inglese",
+    }),
+    defineField({
       name: "content",
       title: "Contenuto",
       type: "block-content",
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "contentEn",
+      title: "Contenuto (EN)",
+      type: "block-content",
+      description: "Contenuto della privacy policy in inglese",
+    }),
+    defineField({
       name: "lastUpdated",
       title: "Ultimo aggiornamento",
       type: "datetime",
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "lastUpdatedEn",
+      title: "Ultimo aggiornamento (EN)",
+      type: "datetime",
+      description: "Data ultimo aggiornamento della versione inglese",
     }),
     defineField({
       name: "seo",

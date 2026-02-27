@@ -3,9 +3,11 @@ import { PRIVACY_POLICY_QUERY } from "@/shared/sanity/queries/policies";
 import { urlFor } from "@/shared/sanity/lib/image";
 import PortableTextRenderer from "@/shared/components/portable-text-renderer";
 import { Metadata } from "next";
+import { getRequestLanguage } from "@/shared/lib/request-locale";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const policy = await client.fetch(PRIVACY_POLICY_QUERY);
+  const language = await getRequestLanguage();
+  const policy = await client.fetch(PRIVACY_POLICY_QUERY, { language });
 
   if (!policy) {
     return {
@@ -37,7 +39,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PrivacyPolicyPage() {
-  const policy = await client.fetch(PRIVACY_POLICY_QUERY);
+  const language = await getRequestLanguage();
+  const policy = await client.fetch(PRIVACY_POLICY_QUERY, { language });
 
   if (!policy) {
     return (

@@ -3,9 +3,9 @@ import { groq } from "next-sanity";
 export const PRIVACY_POLICY_QUERY = groq`
   *[_type == "privacyPolicy" && _id == "privacyPolicySingleton"][0] {
     _id,
-    title,
-    content,
-    lastUpdated,
+    "title": select($language == "en" && defined(titleEn) => titleEn, title),
+    "content": select($language == "en" && defined(contentEn) => contentEn, content),
+    "lastUpdated": select($language == "en" && defined(lastUpdatedEn) => lastUpdatedEn, lastUpdated),
     seo {
       title,
       description,
@@ -26,9 +26,9 @@ export const PRIVACY_POLICY_QUERY = groq`
 export const COOKIE_POLICY_QUERY = groq`
   *[_type == "cookiePolicy" && _id == "cookiePolicySingleton"][0] {
     _id,
-    title,
-    content,
-    lastUpdated,
+    "title": select($language == "en" && defined(titleEn) => titleEn, title),
+    "content": select($language == "en" && defined(contentEn) => contentEn, content),
+    "lastUpdated": select($language == "en" && defined(lastUpdatedEn) => lastUpdatedEn, lastUpdated),
     seo {
       title,
       description,

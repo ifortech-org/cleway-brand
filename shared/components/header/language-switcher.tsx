@@ -20,6 +20,7 @@ export default function LanguageSwitcher({
     const nextPath = value === "EN" ? toEnglishPath(pathname) : toItalianPath(pathname);
     if (nextPath !== pathname) {
       router.push(nextPath);
+      router.refresh();
     }
     onChange?.();
   };
