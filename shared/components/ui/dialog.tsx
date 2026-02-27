@@ -60,16 +60,14 @@ function DialogContent({
           className
         )}
         onPointerDownOutside={(event) => {
-          // Don't prevent interactions with reCAPTCHA elements
+          // Don't prevent interactions with hCaptcha elements
           const target = event.target as Element;
           if (
             target && (
-              target.closest('[src*="recaptcha"]') ||
-              target.closest('.g-recaptcha') ||
-              target.closest('.rc-anchor') ||
-              target.closest('.rc-imageselect') ||
-              target.closest('.rc-challenge') ||
-              // Check for high z-index elements (reCAPTCHA overlay)
+              target.closest('[src*="hcaptcha.com"]') ||
+              target.closest('.h-captcha') ||
+              target.closest('[data-hcaptcha-response]') ||
+              // Check for high z-index elements (captcha overlay)
               getComputedStyle(target).zIndex === '2000000000' ||
               target.closest('[style*="z-index: 2000000000"]')
             )

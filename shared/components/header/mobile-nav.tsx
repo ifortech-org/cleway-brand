@@ -13,9 +13,15 @@ import { NavItem } from "@/shared/types";
 import Logo from "@/shared/components/logo";
 import { useState } from "react";
 import { AlignRight } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { isEnglishPath, localizeHref } from "@/shared/lib/locale-path";
+import LanguageSwitcher from "@/shared/components/header/language-switcher";
 
 export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const useEnglish = isEnglishPath(pathname);
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -38,13 +44,16 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
         </SheetHeader>
         <div className="pt-10 pb-20">
           <div className="container">
+            <div className="mb-6 flex justify-center">
+              <LanguageSwitcher onChange={() => setOpen(false)} />
+            </div>
             <ul className="list-none text-center space-y-3">
               <>
                 {navItems.map((navItem) => (
                   <li key={navItem.label}>
                     <Link
                       onClick={() => setOpen(false)}
-                      href={navItem.href}
+                      href={localizeHref(navItem.href, useEnglish)}
                       target={navItem.target ? "_blank" : undefined}
                       rel={navItem.target ? "noopener noreferrer" : undefined}
                       className="hover:text-decoration-none hover:opacity-50 text-lg">

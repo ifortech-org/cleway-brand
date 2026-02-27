@@ -1,39 +1,34 @@
-import { NextResponse } from "next/server";
-
 export async function POST(request: Request) {
   const { token } = await request.json();
+  const hcaptchaSecretKey = process.env.HCAPTCHA_SECRET_KEY;
 
-  const secretKey = process.env.CAPTCHA_SECRET_KEY;
-
-  const verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
-
-  const formData = new URLSearchParams();
-  formData.append("secret", secretKey!);
-  formData.append("response", token);
-
-  try {
-    const response = await fetch(verificationUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: formData.toString(),
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      return NextResponse.json({ success: true });
-    } else {
-      return NextResponse.json(
-        { success: false, error: "Captcha verification failed" },
-        { status: 400 }
-      );
-    }
-  } catch (error) {
-    return NextResponse.json(
-      { success: false, error: "Internal server error" },
-      { status: 500 }
-    );
+  if (!hcaptchaSecretKey) {
+    return new Response("Missing HCAPTCHA_SECRET_KEY", { status: 500 });
   }
+
+  if (!token) {
+    return new Response("Missing captcha token", { status: 400 });
+  }
+
+  // Google expects application/x-www-form-urlencoded
+  const body = new URLSearchParams({
+    secret: hcaptchaSecretKey,
+    response: token,
+  });
+
+  const response = await fetch("https://hcaptcha.com/siteverify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body,
+  });
+
+  const resData = await response.json();
+
+  if (resData.success) {
+    return new Response("success!", { status: 200 });
+  }
+
+  return new Response("Failed Captcha", { status: 400 });
 }

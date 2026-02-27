@@ -2,6 +2,7 @@ import Link from "next/link";
 import LogoDynamic from "@/shared/components/logo-dynamic";
 import MobileNav from "@/shared/components/header/mobile-nav";
 import DesktopNav from "@/shared/components/header/desktop-nav";
+import LanguageSwitcher from "@/shared/components/header/language-switcher";
 
 const navItems = [
   {
@@ -41,6 +42,7 @@ export default function Header() {
         </Link>
         <div className="hidden xl:flex gap-7 items-center justify-between">
           <DesktopNav navItems={navItems} />
+          <LanguageSwitcher />
         </div>
         <div className="flex items-center xl:hidden">
           <MobileNav navItems={navItems} />

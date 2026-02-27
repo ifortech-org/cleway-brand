@@ -224,17 +224,15 @@
   }
 }
 
-/* Fix reCAPTCHA in modals */
+/* Fix hCaptcha in modals */
 body[style*="pointer-events: none"] [style*="z-index: 2000000000"],
-body[style*="pointer-events: none"] iframe[src*="recaptcha"],
-body[style*="pointer-events: none"] .g-recaptcha,
-body[style*="pointer-events: none"] .rc-anchor,
-body[style*="pointer-events: none"] .rc-imageselect,
-body[style*="pointer-events: none"] .rc-challenge {
+body[style*="pointer-events: none"] iframe[src*="hcaptcha.com"],
+body[style*="pointer-events: none"] .h-captcha,
+body[style*="pointer-events: none"] [data-hcaptcha-response] {
   pointer-events: auto !important;
 }
 
-/* Ensure reCAPTCHA overlay is clickable */
+/* Ensure captcha overlay is clickable */
 div[style*="z-index: 2000000000"] {
   pointer-events: auto !important;
 }
