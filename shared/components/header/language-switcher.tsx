@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   isEnglishPath,
   toEnglishPath,
@@ -13,14 +13,13 @@ export default function LanguageSwitcher({
   onChange?: () => void;
 }) {
   const pathname = usePathname();
-  const router = useRouter();
   const isEnglish = isEnglishPath(pathname);
 
   const handleChange = (value: string) => {
     const nextPath = value === "EN" ? toEnglishPath(pathname) : toItalianPath(pathname);
     if (nextPath !== pathname) {
-      router.push(nextPath);
-      router.refresh();
+      window.location.assign(nextPath);
+      return;
     }
     onChange?.();
   };
