@@ -1,10 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 
-// URL dell'API locale di tracciamento
-const LOCAL_TRACKING_API = "/api/tracker";
+// URL del servizio di tracking esterno
+export const LOCAL_TRACKING_API = "https://tracking.ifortech.com";
+
+// API locale che arricchisce gli eventi con IP e user agent
+const LOCAL_TRACKING_ENRICHMENT_API = "/api/tracker";
 
 // URL del tuo server di tracciamento esterno
-const TRACKING_SERVER_URL = "https://tracking.ifortech.com/webhook/endpoint";
+const TRACKING_SERVER_URL = `${LOCAL_TRACKING_API}/webhook/endpoint`;
 
 const getSessionId = (): string => {
   if (typeof document !== "undefined") {
@@ -63,7 +66,7 @@ export const trackPageView = async (path: string): Promise<void> => {
 
     // Facciamo la richiesta alla nostra API locale invece che direttamente
     // al server di tracciamento esterno
-    const response = await fetch(LOCAL_TRACKING_API, {
+    const response = await fetch(LOCAL_TRACKING_ENRICHMENT_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +141,7 @@ export const trackButtonClick = async (
 
     // Facciamo la richiesta alla nostra API locale invece che direttamente
     // al server di tracciamento esterno
-    const response = await fetch(LOCAL_TRACKING_API, {
+    const response = await fetch(LOCAL_TRACKING_ENRICHMENT_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -200,7 +203,7 @@ export const trackScroll = async (scrollData: ScrollData): Promise<void> => {
 
     // Facciamo la richiesta alla nostra API locale invece che direttamente
     // al server di tracciamento esterno
-    const response = await fetch(LOCAL_TRACKING_API, {
+    const response = await fetch(LOCAL_TRACKING_ENRICHMENT_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

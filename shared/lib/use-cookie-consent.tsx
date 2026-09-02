@@ -9,6 +9,7 @@ import {
   createContext,
 } from "react";
 import { validate as isUuid } from "uuid";
+import { LOCAL_TRACKING_API } from "@/shared/lib/tracking-service";
 
 export type CookieCategory = {
   id: string;
@@ -57,9 +58,8 @@ const CookieContext = createContext<CookieContextType | undefined>(undefined);
 const CONSENT_STORAGE_KEY = "cookie-consent";
 const UUID_STORAGE_KEY = "privacy-uuid";
 const STORAGE_VERSION = "1.0";
-const API_BASE_URL = process.env.NEXT_PUBLIC_PRIVACY_API_URL?.replace(/\/$/, "") || "";
 
-const privacyUrl = (path: string) => `${API_BASE_URL}${path}`;
+const privacyUrl = (path: string) => `${LOCAL_TRACKING_API}${path}`;
 
 function defaultConsent(categories: CookieCategory[]): CookieConsent {
   return Object.fromEntries(
