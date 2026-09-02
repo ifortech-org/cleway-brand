@@ -24,13 +24,18 @@ interface CookieBannerProps {
 }
 
 export function CookieBanner({ settings }: CookieBannerProps) {
-  const { hasConsented, acceptAll, rejectAll, isConsentRequired } =
-    useCookieConsent();
+  const {
+    hasConsented,
+    acceptAll,
+    rejectAll,
+    isConsentRequired,
+    isInitializing,
+  } = useCookieConsent();
   const [showCustomize, setShowCustomize] = React.useState(false);
   const [isDismissed, setIsDismissed] = React.useState(false);
 
   // Non mostrare il banner se l'utente ha già dato il consenso o se non è richiesto
-  if (hasConsented || !isConsentRequired || isDismissed) {
+  if (isInitializing || hasConsented || !isConsentRequired || isDismissed) {
     return null;
   }
 

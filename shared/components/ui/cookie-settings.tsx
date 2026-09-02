@@ -24,6 +24,7 @@ export function CookieSettings() {
     resetConsent,
     status,
     hasConsented,
+    isInitializing,
   } = useCookieConsent();
 
   const [localConsent, setLocalConsent] = React.useState(consent);
@@ -57,6 +58,21 @@ export function CookieSettings() {
     const config = statusConfig[status] || statusConfig.pending;
     return <Badge variant={config.variant}>{config.label}</Badge>;
   };
+
+  if (isInitializing) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Caricamento...</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground">
+            Caricamento delle preferenze cookie...
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
 
   if (!hasConsented) {
     return (
