@@ -36,9 +36,9 @@ type StoredConsent = {
 
 type PrivacyIdentity = {
   uuid: string;
-  technical?: boolean;
-  analytics?: boolean;
-  marketing?: boolean;
+  technical?: boolean | null;
+  analytics?: boolean | null;
+  marketing?: boolean | null;
 };
 
 interface CookieContextType {
@@ -80,7 +80,8 @@ function consentFromIdentity(identity: PrivacyIdentity): CookieConsent | null {
     identity.marketing,
   ];
 
-  if (values.every((value) => value === undefined)) return null;
+  // Un UUID appena creato può avere i consensi ancora a null.
+  if (values.every((value) => value == null)) return null;
   if (!values.every((value) => typeof value === "boolean")) {
     throw new Error("Risposta consensi privacy non valida");
   }
